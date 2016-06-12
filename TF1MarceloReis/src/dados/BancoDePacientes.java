@@ -34,16 +34,6 @@ public class BancoDePacientes implements ChavePessoa{
 	}
 
 	@Override
-	public boolean digitosSaoValidos(String cpf) {
-		for(int count = 0; count < cpf.length(); ++count){
-			if(!Character.isDigit(cpf.charAt(count))){
-				return false;
-			}
-		}		
-		return true;
-	}
-
-	@Override
 	public boolean primeiroDigitoVerificadorEValido(String cpf) {
 		int verificador = 0;
 
@@ -104,7 +94,7 @@ public class BancoDePacientes implements ChavePessoa{
 				cpf.equals("44444444444")	|| cpf.equals("55555555555") || cpf.equals("66666666666") || cpf.equals("77777777777") ||
 				cpf.equals("88888888888") || cpf.equals("99999999999"))
 			return false;
-		if(tamanhoEValido(cpf) && digitosSaoValidos(cpf) && primeiroDigitoVerificadorEValido(cpf) && segundoDigitoVerificadorEValido(cpf) && !cpfERepetido(cpf)){
+		if(tamanhoEValido(cpf) && primeiroDigitoVerificadorEValido(cpf) && segundoDigitoVerificadorEValido(cpf) && !cpfERepetido(cpf)){
 			return true;
 		}else
 			return false;

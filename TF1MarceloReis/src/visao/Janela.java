@@ -70,14 +70,14 @@ public class Janela extends JFrame {
 	 */
 	public Janela(BancoDePacientes bancoPacientes) {
 
-		//getPainelEntrada();
-			try {
+		getPainelEntrada();
+		/*	try {
 				getMenuCadastrar();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
+		*/
 		//	getConsultarCpf();
 		//	getPesquisar();
 
@@ -87,6 +87,7 @@ public class Janela extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(450, 200, 600, 350);
+		
 	}
 
 	private void getPainelEntrada(){
@@ -170,31 +171,31 @@ public class Janela extends JFrame {
 		lblCadastro.setBounds(180, 12, 181, 15);
 		painelCadastrar.add(lblCadastro);
 		
-		final JLabel iconeErroSexo = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		final JLabel iconeErroSexo = new JLabel(new ImageIcon("imagens/error.png"));
 		iconeErroSexo.setLocation(295, 94);
 		iconeErroSexo.setSize(20, 19);
 		iconeErroSexo.setVisible(false);
 		painelCadastrar.add(iconeErroSexo);
 		
-		final JLabel iconeErroCpf = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		final JLabel iconeErroCpf = new JLabel(new ImageIcon("imagens/error.png"));
 		iconeErroCpf.setLocation(228, 125);
 		iconeErroCpf.setSize(20, 19);
 		iconeErroCpf.setVisible(false);
 		painelCadastrar.add(iconeErroCpf);
 
-		final JLabel iconeErroData = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		final JLabel iconeErroData = new JLabel(new ImageIcon("imagens/error.png"));
 		iconeErroData.setLocation(322, 156);
 		iconeErroData.setSize(20, 19);
 		iconeErroData.setVisible(false);
 		painelCadastrar.add(iconeErroData);
 
-		final JLabel iconeErroVacina = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		final JLabel iconeErroVacina = new JLabel(new ImageIcon("imagens/error.png"));
 		iconeErroVacina.setLocation(429, 200);
 		iconeErroVacina.setSize(20, 19);
 		iconeErroVacina.setVisible(false);
 		painelCadastrar.add(iconeErroVacina);
 		
-		final JLabel iconeErroNome = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		final JLabel iconeErroNome = new JLabel(new ImageIcon("imagens/error.png"));
 		iconeErroNome.setLocation(409, 63);
 		iconeErroNome.setSize(20, 19);
 		iconeErroNome.setVisible(false);
@@ -297,6 +298,43 @@ public class Janela extends JFrame {
 		btnConfirmarDados.setBounds(100, 240, 175, 25);
 		painelCadastrar.add(btnConfirmarDados);
 
+		lblNome = new JLabel("Nome: ");
+		lblNome.setForeground(Color.LIGHT_GRAY);
+		lblNome.setBounds(12, 67, 70, 15);
+		painelCadastrar.add(lblNome);
+		
+		lblSexo = new JLabel("Sexo: ");
+		lblSexo.setForeground(Color.LIGHT_GRAY);
+		lblSexo.setBounds(12, 98, 70, 15);
+		painelCadastrar.add(lblSexo);
+		
+		lblCpf = new JLabel("CPF:");
+		lblCpf.setForeground(Color.LIGHT_GRAY);
+		lblCpf.setBounds(12, 129, 70, 15);
+		lblCpf.setToolTipText("Digite apenas numeros");
+		painelCadastrar.add(lblCpf);
+		
+		lblDataNascimento = new JLabel("Data Nascimento: ");
+		lblDataNascimento.setForeground(Color.LIGHT_GRAY);
+		lblDataNascimento.setBounds(12, 160, 130, 15);
+		lblDataNascimento.setToolTipText("(dd/mm/aaaa)");
+		painelCadastrar.add(lblDataNascimento);
+		
+		lblVacinadoAnteriormente = new JLabel("O paciente ja foi vacinado anteriormente?");
+		lblVacinadoAnteriormente.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblVacinadoAnteriormente.setForeground(Color.LIGHT_GRAY);
+		lblVacinadoAnteriormente.setBounds(15, 204, 275, 15);
+		lblVacinadoAnteriormente.setVisible(false);
+		painelCadastrar.add(lblVacinadoAnteriormente);
+		
+		lblQtdVezesVacinado = new JLabel("Quantas vezes o Paciente ja foi Vacinado?");
+		lblQtdVezesVacinado.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblQtdVezesVacinado.setForeground(Color.LIGHT_GRAY);
+		lblQtdVezesVacinado.setBounds(15, 204, 275, 15);
+		lblQtdVezesVacinado.setVisible(false);
+		painelCadastrar.add(lblQtdVezesVacinado);
+
+		
 		ActionListener actionListenerCadastrarMaior = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -362,6 +400,9 @@ public class Janela extends JFrame {
 						textQtdVezesVacinado.setVisible(true);
 					}
 
+					if(!cpfIsValid || !dateIsValid || !nameIsValid || !sexoIsValid){
+						JOptionPane.showMessageDialog(null, "Dados invalidos!");
+					}
 				}else if(e.getSource() == btnFinalizarCadastro){
 					nameIsValid = Validacao.nameIsValid(textRecebeNome.getText().trim());
 					cpfIsValid = pacientes.cpfEValido(textRecebeCpf.getText().trim());
@@ -437,6 +478,8 @@ public class Janela extends JFrame {
 						painelCadastrar.setVisible(false);
 						getContentPane().removeAll();
 						getMenuGeral();
+					}else if(!cpfIsValid || !dateIsValid || !nameIsValid || !sexoIsValid || !qtdVacinadoAnteriormenteIsValid || !vacinadoAnteriormente){
+						JOptionPane.showMessageDialog(null, "Dados invalidos!");
 					}
 				}
 			}
@@ -448,41 +491,6 @@ public class Janela extends JFrame {
 
 		getContentPane().add(painelCadastrar);
 		
-		lblNome = new JLabel("Nome: ");
-		lblNome.setForeground(Color.LIGHT_GRAY);
-		lblNome.setBounds(12, 67, 70, 15);
-		painelCadastrar.add(lblNome);
-		
-		lblSexo = new JLabel("Sexo: ");
-		lblSexo.setForeground(Color.LIGHT_GRAY);
-		lblSexo.setBounds(12, 98, 70, 15);
-		painelCadastrar.add(lblSexo);
-		
-		lblCpf = new JLabel("CPF:");
-		lblCpf.setForeground(Color.LIGHT_GRAY);
-		lblCpf.setBounds(12, 129, 70, 15);
-		lblCpf.setToolTipText("Digite apenas numeros");
-		painelCadastrar.add(lblCpf);
-		
-		lblDataNascimento = new JLabel("Data Nascimento: ");
-		lblDataNascimento.setForeground(Color.LIGHT_GRAY);
-		lblDataNascimento.setBounds(12, 160, 130, 15);
-		lblDataNascimento.setToolTipText("(dd/mm/aaaa)");
-		painelCadastrar.add(lblDataNascimento);
-		
-		lblVacinadoAnteriormente = new JLabel("O paciente ja foi vacinado anteriormente?");
-		lblVacinadoAnteriormente.setFont(new Font("Dialog", Font.BOLD, 11));
-		lblVacinadoAnteriormente.setForeground(Color.LIGHT_GRAY);
-		lblVacinadoAnteriormente.setBounds(15, 204, 275, 15);
-		lblVacinadoAnteriormente.setVisible(false);
-		painelCadastrar.add(lblVacinadoAnteriormente);
-		
-		lblQtdVezesVacinado = new JLabel("Quantas vezes o Paciente ja foi Vacinado?");
-		lblQtdVezesVacinado.setFont(new Font("Dialog", Font.BOLD, 11));
-		lblQtdVezesVacinado.setForeground(Color.LIGHT_GRAY);
-		lblQtdVezesVacinado.setBounds(15, 204, 275, 15);
-		lblQtdVezesVacinado.setVisible(false);
-		painelCadastrar.add(lblQtdVezesVacinado);
 		
 		setVisible(true);		
 	}
@@ -727,4 +735,5 @@ public class Janela extends JFrame {
 			JOptionPane.showMessageDialog(null, "NENHUM PACIENTE CADASTRADO!");
 		}
 	}
+
 }

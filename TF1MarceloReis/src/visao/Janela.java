@@ -28,7 +28,7 @@ public class Janela extends JFrame {
 	private JTextArea txtEntrada;
 	private JButton btnContinuar;
 	//Componentes do painel de Cadastrar
-	private JButton btnConfirmarData;
+	private JButton btnConfirmarDados;
 	private JPanel painelCadastrar;
 	private JTextField txtCadastro;
 	private JTextField txtNome;
@@ -70,19 +70,18 @@ public class Janela extends JFrame {
 	 */
 	public Janela(BancoDePacientes bancoPacientes) {
 
-		getPainelEntrada();
-		/*	try {
+		//getPainelEntrada();
+			try {
 				getMenuCadastrar();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		 */
+		
 		//	getConsultarCpf();
 		//	getPesquisar();
 
 		pacientes = bancoPacientes;
-
 		setBackground(Color.DARK_GRAY);
 		setTitle("H1N1");
 		setResizable(false);
@@ -165,6 +164,36 @@ public class Janela extends JFrame {
 		painelCadastrar.setBorder(new EmptyBorder(5, 5, 5, 5));
 		painelCadastrar.setLayout(null);
 
+		final JLabel iconeErroSexo = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		iconeErroSexo.setLocation(295, 94);
+		iconeErroSexo.setSize(20, 19);
+		iconeErroSexo.setVisible(false);
+		painelCadastrar.add(iconeErroSexo);
+		
+		final JLabel iconeErroCpf = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		iconeErroCpf.setLocation(228, 125);
+		iconeErroCpf.setSize(20, 19);
+		iconeErroCpf.setVisible(false);
+		painelCadastrar.add(iconeErroCpf);
+
+		final JLabel iconeErroData = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		iconeErroData.setLocation(322, 156);
+		iconeErroData.setSize(20, 19);
+		iconeErroData.setVisible(false);
+		painelCadastrar.add(iconeErroData);
+
+		final JLabel iconeErroVacina = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		iconeErroVacina.setLocation(429, 200);
+		iconeErroVacina.setSize(20, 19);
+		iconeErroVacina.setVisible(false);
+		painelCadastrar.add(iconeErroVacina);
+		
+		final JLabel iconeErroNome = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
+		iconeErroNome.setLocation(409, 63);
+		iconeErroNome.setSize(20, 19);
+		iconeErroNome.setVisible(false);
+		painelCadastrar.add(iconeErroNome);
+		
 		txtCadastro = new JTextField();
 		txtCadastro.setEditable(false);
 		txtCadastro.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 14));
@@ -202,14 +231,14 @@ public class Janela extends JFrame {
 		rdbtnMasculino = new JRadioButton("Masculino");
 		rdbtnMasculino.setBackground(Color.DARK_GRAY);
 		rdbtnMasculino.setForeground(Color.LIGHT_GRAY);
-		rdbtnMasculino.setBounds(70, 92, 149, 23);
+		rdbtnMasculino.setBounds(70, 92, 96, 23);
 		painelCadastrar.add(rdbtnMasculino);
 		radiosButons.add(rdbtnMasculino);
 
 		rdbtnFeminino = new JRadioButton("Feminino");
 		rdbtnFeminino.setBackground(Color.DARK_GRAY);
 		rdbtnFeminino.setForeground(Color.LIGHT_GRAY);
-		rdbtnFeminino.setBounds(255, 92, 149, 23);
+		rdbtnFeminino.setBounds(191, 94, 89, 23);
 		painelCadastrar.add(rdbtnFeminino);
 		radiosButons.add(rdbtnFeminino);
 
@@ -276,7 +305,7 @@ public class Janela extends JFrame {
 		txtOPacienteJaVacinadoAnteriormente.setBackground(Color.DARK_GRAY);
 		txtOPacienteJaVacinadoAnteriormente.setEditable(false);
 		txtOPacienteJaVacinadoAnteriormente.setText("O paciente ja foi vacinado anteriormente?");
-		txtOPacienteJaVacinadoAnteriormente.setBounds(12, 190, 269, 19);
+		txtOPacienteJaVacinadoAnteriormente.setBounds(12, 200, 269, 19);
 		txtOPacienteJaVacinadoAnteriormente.setVisible(false);
 		painelCadastrar.add(txtOPacienteJaVacinadoAnteriormente);
 		txtOPacienteJaVacinadoAnteriormente.setColumns(10);
@@ -285,7 +314,7 @@ public class Janela extends JFrame {
 		rdbtnJaVacinadoAnteriormenteSim = new JRadioButton("Sim");
 		rdbtnJaVacinadoAnteriormenteSim.setForeground(Color.LIGHT_GRAY);
 		rdbtnJaVacinadoAnteriormenteSim.setBackground(Color.DARK_GRAY);
-		rdbtnJaVacinadoAnteriormenteSim.setBounds(299, 188, 55, 23);
+		rdbtnJaVacinadoAnteriormenteSim.setBounds(304, 198, 55, 23);
 		rdbtnJaVacinadoAnteriormenteSim.setVisible(false);
 		painelCadastrar.add(rdbtnJaVacinadoAnteriormenteSim);
 		yesNoOption.add(rdbtnJaVacinadoAnteriormenteSim);
@@ -293,7 +322,7 @@ public class Janela extends JFrame {
 		rdbtnJaVacinadoAnteriormenteNao = new JRadioButton("Nao");
 		rdbtnJaVacinadoAnteriormenteNao.setForeground(Color.LIGHT_GRAY);
 		rdbtnJaVacinadoAnteriormenteNao.setBackground(Color.DARK_GRAY);
-		rdbtnJaVacinadoAnteriormenteNao.setBounds(369, 188, 55, 23);
+		rdbtnJaVacinadoAnteriormenteNao.setBounds(363, 200, 55, 23);
 		rdbtnJaVacinadoAnteriormenteNao.setVisible(false);
 		painelCadastrar.add(rdbtnJaVacinadoAnteriormenteNao);
 		yesNoOption.add(rdbtnJaVacinadoAnteriormenteNao);
@@ -325,10 +354,10 @@ public class Janela extends JFrame {
 		btnCancelar.setBounds(339, 240, 175, 25);
 		painelCadastrar.add(btnCancelar);
 
-		btnConfirmarData = new JButton("Confirmar Data");
-		btnConfirmarData.setBackground(Color.LIGHT_GRAY);
-		btnConfirmarData.setBounds(100, 240, 175, 25);
-		painelCadastrar.add(btnConfirmarData);
+		btnConfirmarDados = new JButton("Confirmar Dados");
+		btnConfirmarDados.setBackground(Color.LIGHT_GRAY);
+		btnConfirmarDados.setBounds(100, 240, 175, 25);
+		painelCadastrar.add(btnConfirmarDados);
 
 		ActionListener actionListenerCadastrarMaior = new ActionListener() {
 
@@ -340,7 +369,7 @@ public class Janela extends JFrame {
 					painelCadastrar.setVisible(false);
 					getContentPane().removeAll();
 					getMenuGeral();
-				}else if(e.getSource() == btnConfirmarData){
+				}else if(e.getSource() == btnConfirmarDados){
 					nameIsValid = Validacao.nameIsValid(textRecebeNome.getText().trim());
 					cpfIsValid = pacientes.cpfEValido(textRecebeCpf.getText().trim());
 
@@ -353,18 +382,22 @@ public class Janela extends JFrame {
 					}
 					if(!rdbtnFeminino.isSelected() && !rdbtnMasculino.isSelected()){
 						sexoIsValid = false;
-						JOptionPane.showMessageDialog(null, "Voce precisa escolher o Sexo!");
+						iconeErroSexo.setVisible(true);
+					}else{
+						iconeErroSexo.setVisible(false);
 					}
 
 					if(!nameIsValid){
-						JOptionPane.showMessageDialog(null, "Nome Inválido!");
+						iconeErroNome.setVisible(true);
 					}else{
+						iconeErroNome.setVisible(false);
 						textRecebeNome.setEditable(false);
 					}
 
 					if(!dateIsValid){
-						JOptionPane.showMessageDialog(null, "Data invalida!");
+						iconeErroData.setVisible(true);
 					}else{
+						iconeErroData.setVisible(false);
 						data = new Data(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
 								Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
 								Integer.parseInt(textRecebeAnoNascimento.getText().trim()));
@@ -372,12 +405,13 @@ public class Janela extends JFrame {
 						textRecebeMesNascimento.setEditable(false);
 						textRecebeAnoNascimento.setEditable(false);
 						btnFinalizarCadastro.setVisible(true);
-						btnConfirmarData.setVisible(false);
+						btnConfirmarDados.setVisible(false);
 					}
 
 					if(!cpfIsValid){
-						JOptionPane.showMessageDialog(null, "Cpf inválido!");
+						iconeErroCpf.setVisible(true);
 					}else{
+						iconeErroCpf.setVisible(false);
 						textRecebeCpf.setEditable(false);
 					}
 
@@ -398,14 +432,18 @@ public class Janela extends JFrame {
 							Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
 							Integer.parseInt(textRecebeAnoNascimento.getText().trim()));
 
-					if(!rdbtnFeminino.isSelected() && !rdbtnMasculino.isSelected()){
-						sexoIsValid = false;
-						JOptionPane.showMessageDialog(null, "Voce precisa escolher o Sexo!");
-					}
-
 					if(data.getIdade()>=18 && !rdbtnJaVacinadoAnteriormenteNao.isSelected() && !rdbtnJaVacinadoAnteriormenteSim.isSelected()){
 						vacinadoAnteriormente=false;
-						JOptionPane.showMessageDialog(null, "Voce precisa selecinar se foi ou nao vacinado anteriormente!");
+						iconeErroVacina.setVisible(true);
+					}else if(data.getIdade()>=18 && (rdbtnJaVacinadoAnteriormenteNao.isSelected() || rdbtnJaVacinadoAnteriormenteSim.isSelected())){
+						iconeErroVacina.setVisible(false);
+					}
+					
+					if(!rdbtnFeminino.isSelected() && !rdbtnMasculino.isSelected()){
+						sexoIsValid = false;
+						iconeErroSexo.setVisible(true);
+					}else{
+						iconeErroSexo.setVisible(false);
 					}
 
 					if(data.getIdade()<18){
@@ -416,17 +454,29 @@ public class Janela extends JFrame {
 						}
 					}
 					if(!nameIsValid){
-						JOptionPane.showMessageDialog(null, "Nome Inválido!");
+						iconeErroNome.setVisible(true);
+					}else{
+						iconeErroNome.setVisible(false);
 					}
+					
 					if(!dateIsValid){
-						JOptionPane.showMessageDialog(null, "Data invalida!");
+						iconeErroData.setVisible(true);
+					}else{
+						iconeErroData.setVisible(false);
 					}
+					
 					if(!cpfIsValid){
-						JOptionPane.showMessageDialog(null, "Cpf inválido!");
+						iconeErroCpf.setVisible(true);
+					}else{
+						iconeErroCpf.setVisible(false);
 					}
-					if(!qtdVacinadoAnteriormenteIsValid){
-						JOptionPane.showMessageDialog(null, "Quantidade inválida!");
+					
+					if(!qtdVacinadoAnteriormenteIsValid && data.getIdade()<18){
+						iconeErroVacina.setVisible(true);
+					}else if(qtdVacinadoAnteriormenteIsValid && data.getIdade()<18){
+						iconeErroVacina.setVisible(false);
 					}
+					
 					if(nameIsValid && dateIsValid && vacinadoAnteriormente && cpfIsValid && sexoIsValid && data.getIdade()>=18){
 						pacientes.getPessoasMaioresDeIdade().add(new MaiorDeIdade(new StringBuilder().append(textRecebeNome.getText().trim())
 								, rdbtnFeminino.isSelected() ? 'F' : 'M', new Data(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
@@ -456,7 +506,7 @@ public class Janela extends JFrame {
 
 		btnFinalizarCadastro.addActionListener(actionListenerCadastrarMaior);
 		btnCancelar.addActionListener(actionListenerCadastrarMaior);
-		btnConfirmarData.addActionListener(actionListenerCadastrarMaior);
+		btnConfirmarDados.addActionListener(actionListenerCadastrarMaior);
 
 		getContentPane().add(painelCadastrar);
 		setVisible(true);		

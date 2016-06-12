@@ -30,13 +30,8 @@ public class Janela extends JFrame {
 	//Componentes do painel de Cadastrar
 	private JButton btnConfirmarDados;
 	private JPanel painelCadastrar;
-	private JTextField txtCadastro;
-	private JTextField txtNome;
 	private JTextField textRecebeNome;
-	private JTextField txtSexo;
-	private JTextField txtCpf;
 	private JTextField textRecebeCpf;
-	private JTextField txtDataNascimento;
 	private JTextField textRecebeDiaNascimento;
 	private JTextField textBarraDivisoriaNascimento;
 	private JTextField textRecebeMesNascimento;
@@ -45,10 +40,8 @@ public class Janela extends JFrame {
 	private JButton btnFinalizarCadastro;
 	private JRadioButton rdbtnMasculino;
 	private JRadioButton rdbtnFeminino;
-	private JTextField txtOPacienteJaVacinadoAnteriormente;
 	private JRadioButton rdbtnJaVacinadoAnteriormenteSim;
 	private JRadioButton rdbtnJaVacinadoAnteriormenteNao;
-	private JTextField txtQuantasVezesOPacienteFoiVacinado;
 	private JTextField textQtdVezesVacinado;
 	private JButton btnCancelar;
 	//Componentes do painel Consultar CPF
@@ -63,6 +56,13 @@ public class Janela extends JFrame {
 	private JButton btnPesquisar;
 	private JButton btnVoltarPesquisar;
 	private JScrollPane scrollPane;
+	private JLabel lblCadastro;
+	private JLabel lblNome;
+	private JLabel lblSexo;
+	private JLabel lblCpf;
+	private JLabel lblDataNascimento;
+	private JLabel lblVacinadoAnteriormente;
+	private JLabel lblQtdVezesVacinado;
 
 
 	/**
@@ -164,6 +164,12 @@ public class Janela extends JFrame {
 		painelCadastrar.setBorder(new EmptyBorder(5, 5, 5, 5));
 		painelCadastrar.setLayout(null);
 
+		lblCadastro = new JLabel("Cadastro do paciente");
+		lblCadastro.setForeground(Color.LIGHT_GRAY);
+		lblCadastro.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblCadastro.setBounds(180, 12, 181, 15);
+		painelCadastrar.add(lblCadastro);
+		
 		final JLabel iconeErroSexo = new JLabel(new ImageIcon("/home/marcelo/Documents/oo/programas/OO/TF1MarceloReis/imagens/error.png"));
 		iconeErroSexo.setLocation(295, 94);
 		iconeErroSexo.setSize(20, 19);
@@ -193,39 +199,11 @@ public class Janela extends JFrame {
 		iconeErroNome.setSize(20, 19);
 		iconeErroNome.setVisible(false);
 		painelCadastrar.add(iconeErroNome);
-		
-		txtCadastro = new JTextField();
-		txtCadastro.setEditable(false);
-		txtCadastro.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 14));
-		txtCadastro.setForeground(Color.LIGHT_GRAY);
-		txtCadastro.setBackground(Color.DARK_GRAY);
-		txtCadastro.setText("Cadastro do paciente");
-		txtCadastro.setBounds(184, 12, 175, 19);
-		painelCadastrar.add(txtCadastro);
-		txtCadastro.setColumns(10);
-
-		txtNome = new JTextField();
-		txtNome.setForeground(Color.LIGHT_GRAY);
-		txtNome.setBackground(Color.DARK_GRAY);
-		txtNome.setEditable(false);
-		txtNome.setText("Nome: ");
-		txtNome.setBounds(12, 63, 46, 19);
-		painelCadastrar.add(txtNome);
-		txtNome.setColumns(10);
 
 		textRecebeNome = new JTextField();
 		textRecebeNome.setBounds(70, 63, 334, 19);
 		painelCadastrar.add(textRecebeNome);
 		textRecebeNome.setColumns(30);
-
-		txtSexo = new JTextField();
-		txtSexo.setForeground(Color.LIGHT_GRAY);
-		txtSexo.setBackground(Color.DARK_GRAY);
-		txtSexo.setEditable(false);
-		txtSexo.setText("Sexo: ");
-		txtSexo.setBounds(12, 94, 46, 19);
-		painelCadastrar.add(txtSexo);
-		txtSexo.setColumns(10);
 
 		ButtonGroup radiosButons = new ButtonGroup();
 		rdbtnMasculino = new JRadioButton("Masculino");
@@ -242,30 +220,10 @@ public class Janela extends JFrame {
 		painelCadastrar.add(rdbtnFeminino);
 		radiosButons.add(rdbtnFeminino);
 
-		txtCpf = new JTextField();
-		txtCpf.setForeground(Color.LIGHT_GRAY);
-		txtCpf.setBackground(Color.DARK_GRAY);
-		txtCpf.setEditable(false);
-		txtCpf.setText("CPF: ");
-		txtCpf.setBounds(12, 125, 46, 19);
-		txtCpf.setToolTipText("Digite apenas numeros");
-		painelCadastrar.add(txtCpf);
-		txtCpf.setColumns(10);
-
 		textRecebeCpf = new JFormattedTextField(new MaskFormatter("###########"));
 		textRecebeCpf.setBounds(64, 125, 155, 19);
 		painelCadastrar.add(textRecebeCpf);
 		textRecebeCpf.setColumns(11);
-
-		txtDataNascimento = new JTextField();
-		txtDataNascimento.setForeground(Color.LIGHT_GRAY);
-		txtDataNascimento.setBackground(Color.DARK_GRAY);
-		txtDataNascimento.setEditable(false);
-		txtDataNascimento.setText("Data Nascimento: ");
-		txtDataNascimento.setBounds(12, 156, 114, 19);
-		txtDataNascimento.setToolTipText("(dd/mm/aaaa)");
-		painelCadastrar.add(txtDataNascimento);
-		txtDataNascimento.setColumns(10);
 
 		textRecebeDiaNascimento = new JFormattedTextField(new MaskFormatter("##"));
 		textRecebeDiaNascimento.setBounds(138, 156, 20, 19);
@@ -300,16 +258,6 @@ public class Janela extends JFrame {
 		painelCadastrar.add(textRecebeAnoNascimento);
 		textRecebeAnoNascimento.setColumns(4);
 
-		txtOPacienteJaVacinadoAnteriormente = new JTextField();
-		txtOPacienteJaVacinadoAnteriormente.setForeground(Color.LIGHT_GRAY);
-		txtOPacienteJaVacinadoAnteriormente.setBackground(Color.DARK_GRAY);
-		txtOPacienteJaVacinadoAnteriormente.setEditable(false);
-		txtOPacienteJaVacinadoAnteriormente.setText("O paciente ja foi vacinado anteriormente?");
-		txtOPacienteJaVacinadoAnteriormente.setBounds(12, 200, 269, 19);
-		txtOPacienteJaVacinadoAnteriormente.setVisible(false);
-		painelCadastrar.add(txtOPacienteJaVacinadoAnteriormente);
-		txtOPacienteJaVacinadoAnteriormente.setColumns(10);
-
 		ButtonGroup yesNoOption = new ButtonGroup();
 		rdbtnJaVacinadoAnteriormenteSim = new JRadioButton("Sim");
 		rdbtnJaVacinadoAnteriormenteSim.setForeground(Color.LIGHT_GRAY);
@@ -326,16 +274,6 @@ public class Janela extends JFrame {
 		rdbtnJaVacinadoAnteriormenteNao.setVisible(false);
 		painelCadastrar.add(rdbtnJaVacinadoAnteriormenteNao);
 		yesNoOption.add(rdbtnJaVacinadoAnteriormenteNao);
-
-		txtQuantasVezesOPacienteFoiVacinado = new JTextField();
-		txtQuantasVezesOPacienteFoiVacinado.setBackground(Color.DARK_GRAY);
-		txtQuantasVezesOPacienteFoiVacinado.setForeground(Color.LIGHT_GRAY);
-		txtQuantasVezesOPacienteFoiVacinado.setEditable(false);
-		txtQuantasVezesOPacienteFoiVacinado.setText("Quantas vezes o Paciente ja foi Vacinado?");
-		txtQuantasVezesOPacienteFoiVacinado.setBounds(12, 200, 275, 19);
-		txtQuantasVezesOPacienteFoiVacinado.setVisible(false);
-		painelCadastrar.add(txtQuantasVezesOPacienteFoiVacinado);
-		txtQuantasVezesOPacienteFoiVacinado.setColumns(10);
 
 		textQtdVezesVacinado = new JTextField();
 		textQtdVezesVacinado.setBounds(299, 200, 60, 19);
@@ -416,11 +354,11 @@ public class Janela extends JFrame {
 					}
 
 					if(dateIsValid && data.getIdade()>=18){
-						txtOPacienteJaVacinadoAnteriormente.setVisible(true);
+						lblVacinadoAnteriormente.setVisible(true);
 						rdbtnJaVacinadoAnteriormenteNao.setVisible(true);
 						rdbtnJaVacinadoAnteriormenteSim.setVisible(true);
 					}else if(dateIsValid && data.getIdade()<18){
-						txtQuantasVezesOPacienteFoiVacinado.setVisible(true);
+						lblQtdVezesVacinado.setVisible(true);
 						textQtdVezesVacinado.setVisible(true);
 					}
 
@@ -509,6 +447,43 @@ public class Janela extends JFrame {
 		btnConfirmarDados.addActionListener(actionListenerCadastrarMaior);
 
 		getContentPane().add(painelCadastrar);
+		
+		lblNome = new JLabel("Nome: ");
+		lblNome.setForeground(Color.LIGHT_GRAY);
+		lblNome.setBounds(12, 67, 70, 15);
+		painelCadastrar.add(lblNome);
+		
+		lblSexo = new JLabel("Sexo: ");
+		lblSexo.setForeground(Color.LIGHT_GRAY);
+		lblSexo.setBounds(12, 98, 70, 15);
+		painelCadastrar.add(lblSexo);
+		
+		lblCpf = new JLabel("CPF:");
+		lblCpf.setForeground(Color.LIGHT_GRAY);
+		lblCpf.setBounds(12, 129, 70, 15);
+		lblCpf.setToolTipText("Digite apenas numeros");
+		painelCadastrar.add(lblCpf);
+		
+		lblDataNascimento = new JLabel("Data Nascimento: ");
+		lblDataNascimento.setForeground(Color.LIGHT_GRAY);
+		lblDataNascimento.setBounds(12, 160, 130, 15);
+		lblDataNascimento.setToolTipText("(dd/mm/aaaa)");
+		painelCadastrar.add(lblDataNascimento);
+		
+		lblVacinadoAnteriormente = new JLabel("O paciente ja foi vacinado anteriormente?");
+		lblVacinadoAnteriormente.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblVacinadoAnteriormente.setForeground(Color.LIGHT_GRAY);
+		lblVacinadoAnteriormente.setBounds(15, 204, 275, 15);
+		lblVacinadoAnteriormente.setVisible(false);
+		painelCadastrar.add(lblVacinadoAnteriormente);
+		
+		lblQtdVezesVacinado = new JLabel("Quantas vezes o Paciente ja foi Vacinado?");
+		lblQtdVezesVacinado.setFont(new Font("Dialog", Font.BOLD, 11));
+		lblQtdVezesVacinado.setForeground(Color.LIGHT_GRAY);
+		lblQtdVezesVacinado.setBounds(15, 204, 275, 15);
+		lblQtdVezesVacinado.setVisible(false);
+		painelCadastrar.add(lblQtdVezesVacinado);
+		
 		setVisible(true);		
 	}
 

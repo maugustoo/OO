@@ -32,11 +32,6 @@ public class Janela extends JFrame {
 	private JPanel painelCadastrar;
 	private JTextField textRecebeNome;
 	private JTextField textRecebeCpf;
-	private JTextField textRecebeDiaNascimento;
-	private JTextField textBarraDivisoriaNascimento;
-	private JTextField textRecebeMesNascimento;
-	private JTextField textBarraDivisoriaNascimento2;
-	private JTextField textRecebeAnoNascimento;
 	private JButton btnFinalizarCadastro;
 	private JRadioButton rdbtnMasculino;
 	private JRadioButton rdbtnFeminino;
@@ -63,6 +58,7 @@ public class Janela extends JFrame {
 	private JLabel lblDataNascimento;
 	private JLabel lblVacinadoAnteriormente;
 	private JLabel lblQtdVezesVacinado;
+	private JTextField textRecebeDataNascimento;
 
 
 	/**
@@ -70,13 +66,13 @@ public class Janela extends JFrame {
 	 */
 	public Janela(BancoDePacientes bancoPacientes) {
 
-		getPainelEntrada();
-		/*	try {
+		//getPainelEntrada();
+			try {
 				getMenuCadastrar();
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-		*/
+		
 		//	getConsultarCpf();
 		//	getPesquisar();
 
@@ -225,39 +221,6 @@ public class Janela extends JFrame {
 		painelCadastrar.add(textRecebeCpf);
 		textRecebeCpf.setColumns(11);
 
-		textRecebeDiaNascimento = new JFormattedTextField(new MaskFormatter("##"));
-		textRecebeDiaNascimento.setBounds(138, 156, 20, 19);
-		painelCadastrar.add(textRecebeDiaNascimento);
-		textRecebeDiaNascimento.setColumns(2);
-
-		textBarraDivisoriaNascimento = new JTextField();
-		textBarraDivisoriaNascimento.setBackground(Color.DARK_GRAY);
-		textBarraDivisoriaNascimento.setForeground(Color.LIGHT_GRAY);
-		textBarraDivisoriaNascimento.setEditable(false);
-		textBarraDivisoriaNascimento.setText("/");
-		textBarraDivisoriaNascimento.setBounds(170, 156, 9, 19);
-		painelCadastrar.add(textBarraDivisoriaNascimento);
-		textBarraDivisoriaNascimento.setColumns(1);
-
-		textRecebeMesNascimento = new JFormattedTextField(new MaskFormatter("##"));
-		textRecebeMesNascimento.setBounds(191, 156, 20, 19);
-		painelCadastrar.add(textRecebeMesNascimento);
-		textRecebeMesNascimento.setColumns(2);
-
-		textBarraDivisoriaNascimento2 = new JTextField();
-		textBarraDivisoriaNascimento2.setForeground(Color.LIGHT_GRAY);
-		textBarraDivisoriaNascimento2.setBackground(Color.DARK_GRAY);
-		textBarraDivisoriaNascimento2.setEditable(false);
-		textBarraDivisoriaNascimento2.setText("/");
-		textBarraDivisoriaNascimento2.setBounds(228, 156, 9, 19);
-		painelCadastrar.add(textBarraDivisoriaNascimento2);
-		textBarraDivisoriaNascimento2.setColumns(1);
-
-		textRecebeAnoNascimento = new JFormattedTextField(new MaskFormatter("####"));
-		textRecebeAnoNascimento.setBounds(249, 156, 55, 19);
-		painelCadastrar.add(textRecebeAnoNascimento);
-		textRecebeAnoNascimento.setColumns(4);
-
 		ButtonGroup yesNoOption = new ButtonGroup();
 		rdbtnJaVacinadoAnteriormenteSim = new JRadioButton("Sim");
 		rdbtnJaVacinadoAnteriormenteSim.setForeground(Color.LIGHT_GRAY);
@@ -318,6 +281,12 @@ public class Janela extends JFrame {
 		lblDataNascimento.setBounds(12, 160, 130, 15);
 		lblDataNascimento.setToolTipText("(dd/mm/aaaa)");
 		painelCadastrar.add(lblDataNascimento);
+		 
+		textRecebeDataNascimento = new JFormattedTextField(new MaskFormatter("##/##/####"));
+		textRecebeDataNascimento.setBounds(146, 156, 78, 19);
+		painelCadastrar.add(textRecebeDataNascimento);
+		textRecebeDataNascimento.setColumns(10);
+		
 		
 		lblVacinadoAnteriormente = new JLabel("O paciente ja foi vacinado anteriormente?");
 		lblVacinadoAnteriormente.setFont(new Font("Dialog", Font.BOLD, 11));
@@ -339,6 +308,7 @@ public class Janela extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				boolean nameIsValid, cpfIsValid, dateIsValid = true, sexoIsValid=true, vacinadoAnteriormente=true, qtdVacinadoAnteriormenteIsValid = true;
 				Data data = null;
+				String dataNascimento[] = null;
 
 				if(e.getSource() == btnCancelar){
 					painelCadastrar.setVisible(false);
@@ -349,9 +319,11 @@ public class Janela extends JFrame {
 					cpfIsValid = pacientes.cpfEValido(textRecebeCpf.getText().trim());
 
 					try {
-						dateIsValid = Validacao.dataIsValid(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
-								Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
-								Integer.parseInt(textRecebeAnoNascimento.getText().trim()));
+						dataNascimento = textRecebeDataNascimento.getText().split("/");
+						
+						dateIsValid = Validacao.dataIsValid(Integer.parseInt(dataNascimento[0]),
+								Integer.parseInt(dataNascimento[1]), 
+								Integer.parseInt(dataNascimento[2]));
 					} catch (Exception ex) {
 						dateIsValid = false;
 					}
@@ -373,12 +345,10 @@ public class Janela extends JFrame {
 						iconeErroData.setVisible(true);
 					}else{
 						iconeErroData.setVisible(false);
-						data = new Data(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
-								Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
-								Integer.parseInt(textRecebeAnoNascimento.getText().trim()));
-						textRecebeDiaNascimento.setEditable(false);
-						textRecebeMesNascimento.setEditable(false);
-						textRecebeAnoNascimento.setEditable(false);
+						data = new Data(Integer.parseInt(dataNascimento[0]),
+								Integer.parseInt(dataNascimento[1]), 
+								Integer.parseInt(dataNascimento[2]));
+						textRecebeDataNascimento.setEditable(false);
 						btnFinalizarCadastro.setVisible(true);
 						btnConfirmarDados.setVisible(false);
 					}
@@ -405,10 +375,12 @@ public class Janela extends JFrame {
 				}else if(e.getSource() == btnFinalizarCadastro){
 					nameIsValid = Validacao.nameIsValid(textRecebeNome.getText().trim());
 					cpfIsValid = pacientes.cpfEValido(textRecebeCpf.getText().trim());
+					
+					dataNascimento = textRecebeDataNascimento.getText().split("/");
 
-					data = new Data(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
-							Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
-							Integer.parseInt(textRecebeAnoNascimento.getText().trim()));
+					data = new Data(Integer.parseInt(dataNascimento[0]),
+							Integer.parseInt(dataNascimento[1]), 
+							Integer.parseInt(dataNascimento[2]));
 
 					if(data.getIdade()>=18 && !rdbtnJaVacinadoAnteriormenteNao.isSelected() && !rdbtnJaVacinadoAnteriormenteSim.isSelected()){
 						vacinadoAnteriormente=false;
@@ -457,9 +429,7 @@ public class Janela extends JFrame {
 					
 					if(nameIsValid && dateIsValid && vacinadoAnteriormente && cpfIsValid && sexoIsValid && data.getIdade()>=18){
 						pacientes.getPessoasMaioresDeIdade().add(new MaiorDeIdade(new StringBuilder().append(textRecebeNome.getText().trim())
-								, rdbtnFeminino.isSelected() ? 'F' : 'M', new Data(Integer.parseInt(textRecebeDiaNascimento.getText().trim()),
-										Integer.parseInt(textRecebeMesNascimento.getText().trim()), 
-										Integer.parseInt(textRecebeAnoNascimento.getText().trim())), 
+								, rdbtnFeminino.isSelected() ? 'F' : 'M', data, 
 										new StringBuilder().append(textRecebeCpf.getText().trim()),
 										rdbtnJaVacinadoAnteriormenteSim.isSelected() ? true : false));
 						JOptionPane.showMessageDialog(null, "Cadastro Efetuado com Sucesso!");
@@ -489,7 +459,6 @@ public class Janela extends JFrame {
 		btnConfirmarDados.addActionListener(actionListenerCadastrarMaior);
 
 		getContentPane().add(painelCadastrar);
-		
 		
 		setVisible(true);		
 	}
@@ -735,5 +704,4 @@ public class Janela extends JFrame {
 			JOptionPane.showMessageDialog(null, "NENHUM PACIENTE CADASTRADO!");
 		}
 	}
-
 }

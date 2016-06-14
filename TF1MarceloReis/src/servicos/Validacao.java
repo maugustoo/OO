@@ -39,7 +39,8 @@ public class Validacao {
 			return false;
 		}if(Calendar.getInstance().get(Calendar.YEAR) == ano && Calendar.getInstance().get(Calendar.MONTH)+1 == mes && Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < dia){
 			return false;
-		}
+		}if(ano < 1900)
+			return false;
 		return true;
 	}
 

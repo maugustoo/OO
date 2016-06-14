@@ -74,7 +74,6 @@ public class Janela extends JFrame {
 		/*	try {
 				getMenuCadastrar();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		*/
@@ -221,7 +220,7 @@ public class Janela extends JFrame {
 		painelCadastrar.add(rdbtnFeminino);
 		radiosButons.add(rdbtnFeminino);
 
-		textRecebeCpf = new JFormattedTextField(new MaskFormatter("###########"));
+		textRecebeCpf = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 		textRecebeCpf.setBounds(64, 125, 155, 19);
 		painelCadastrar.add(textRecebeCpf);
 		textRecebeCpf.setColumns(11);
@@ -512,7 +511,7 @@ public class Janela extends JFrame {
 		lblDigiteOCpf.setBounds(151, 132, 95, 15);
 		painelConsultarCpf.add(lblDigiteOCpf);
 
-		textRecebeCpfConsulta = new JFormattedTextField(new MaskFormatter("###########"));
+		textRecebeCpfConsulta = new JFormattedTextField(new MaskFormatter("###.###.###-##"));
 		textRecebeCpfConsulta.setBounds(290, 130, 114, 19);
 		painelConsultarCpf.add(textRecebeCpfConsulta);
 		textRecebeCpfConsulta.setColumns(11);
@@ -656,6 +655,7 @@ public class Janela extends JFrame {
 					boolean encontrouAlguem = false;
 					int numColunas = tablePesquisar.getModel().getColumnCount();
 					Object []linhas = new Object[numColunas];
+					
 					List<Pessoa> pessoas = new ArrayList<Pessoa>();
 
 					tablePesquisar.setModel(new DefaultTableModel(new Object[][] {}, 

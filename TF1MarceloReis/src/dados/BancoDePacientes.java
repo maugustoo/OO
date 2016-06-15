@@ -18,7 +18,7 @@ public class BancoDePacientes implements ChavePessoa{
 	public void setPessoas(Pessoa pessoa) {
 		pessoas.add(pessoa);
 	}
-	
+
 	@Override
 	public boolean tamanhoEValido(String cpf) {
 		return cpf.length() == 11 ? true : false;
@@ -72,7 +72,7 @@ public class BancoDePacientes implements ChavePessoa{
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

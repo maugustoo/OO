@@ -24,7 +24,7 @@ public class MaiorDeIdade extends Pessoa {
 				"CPF: " + getCpf() + "\n" +
 				"Ja foi vacinado? " + ((getVacinadaAnteriormente()) ? "Sim\n" : "Nao\n");
 	}
-	
+
 	public String toString() {
 		return this.getNome() + Janela.tabular(this.getNome().length()).toString() + this.getDataNascimento() + Janela.tabular(this.getDataNascimento().toString().length()).toString() + 
 				(this.getSexo() == 'M' ? "Masculino" + Janela.tabular(9) : "Feminino" + Janela.tabular(8)) + this.getCpf() + 

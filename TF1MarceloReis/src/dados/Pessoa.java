@@ -30,14 +30,14 @@ public abstract class Pessoa implements Comparable<Pessoa>{
 	public String consultarDados(){
 		return "";
 	}
-	
+
 	public StringBuilder getCpf() {
 		return cpf;
 	}
-	
+
 	@Override
 	public int compareTo(Pessoa pessoa) {
 		return (getNome().compareTo(pessoa.getNome()));
 	}
-	
+
 }

@@ -11,9 +11,7 @@ import dados.BancoDePacientes;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
@@ -136,7 +134,7 @@ public class Janela extends JFrame {
 		iconeErroVacina.setSize(20, 19);
 		iconeErroVacina.setVisible(false);
 		painelCadastrar.add(iconeErroVacina);
-		
+
 		final JLabel erroCpfJaCadastrado = new JLabel("CPF já cadastrado!");
 		erroCpfJaCadastrado.setForeground(Color.RED);
 		erroCpfJaCadastrado.setBounds(260, 125, 134, 15);
@@ -314,7 +312,7 @@ public class Janela extends JFrame {
 						}else{
 							erroCpfJaCadastrado.setVisible(false);
 						}
-							
+
 					}else{
 						iconeErroCpf.setVisible(false);
 						erroCpfJaCadastrado.setVisible(false);
@@ -535,7 +533,7 @@ public class Janela extends JFrame {
 		final JLabel lblQuantidadeDePacientes;
 		final JTextField textInformaQtdPacientesEncontrados;
 
-		
+
 		painelPesquisar = new JPanel();
 		painelPesquisar.setBackground(Color.DARK_GRAY);
 		painelPesquisar.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -568,7 +566,7 @@ public class Janela extends JFrame {
 		btnVoltarPesquisar.setForeground(Color.DARK_GRAY);
 		btnVoltarPesquisar.setBounds(334, 112, 117, 25);
 		painelPesquisar.add(btnVoltarPesquisar);
-		
+
 		textInformaQtdPacientesEncontrados = new JTextField();
 		textInformaQtdPacientesEncontrados.setEditable(false);
 		textInformaQtdPacientesEncontrados.setBounds(345, 298, 39, 19);
@@ -587,15 +585,15 @@ public class Janela extends JFrame {
 		lblQuantidadeDePacientes.setForeground(Color.LIGHT_GRAY);
 		lblQuantidadeDePacientes.setBounds(60, 300, 283, 15);
 		painelPesquisar.add(lblQuantidadeDePacientes);
-		
+
 		tablePesquisar.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nome", "Idade", "Sexo", "CPF"
-			}
-		));
-		
+				new Object[][] {
+				},
+				new String[] {
+						"Nome", "Idade", "Sexo", "CPF"
+				}
+				));
+
 		scrollPane.setViewportView(tablePesquisar);
 
 		ActionListener actionListenerPesquisar = new ActionListener() {
@@ -610,7 +608,7 @@ public class Janela extends JFrame {
 					boolean encontrouAlguem = false;
 					int numColunas = tablePesquisar.getModel().getColumnCount();
 					int numLinhas;
-					
+
 					Object []linhas = new Object[numColunas];
 
 					tablePesquisar.setModel(new DefaultTableModel(new Object[][] {}, 
@@ -619,7 +617,7 @@ public class Janela extends JFrame {
 							));
 
 					scrollPane.setViewportView(tablePesquisar);
-					
+
 					Collections.sort(pacientes.getPessoas());
 
 					for(Pessoa pessoa : pacientes.getPessoas()){
@@ -629,13 +627,13 @@ public class Janela extends JFrame {
 							linhas[1] = pessoa.getDataNascimento().getIdade();
 							linhas[2] = pessoa.getSexo() == 'M' ? "Masculino" : "Feminino";
 							linhas[3] = pessoa.getCpf();
-							
+
 							((DefaultTableModel) tablePesquisar.getModel()).addRow(linhas);
 						}
 					}
 					numLinhas = tablePesquisar.getModel().getRowCount();
 					textInformaQtdPacientesEncontrados.setText(numLinhas + "");
-					
+
 					if(!encontrouAlguem){
 						JOptionPane.showMessageDialog(null, "Nao foi encontrado nenhum paciente");
 					}
@@ -651,19 +649,19 @@ public class Janela extends JFrame {
 
 		getContentPane().add(painelPesquisar);
 		setVisible(true);
-		
+
 	}
 
 	private void listarPessoas(){
 
 		if(pacientes.getPessoas().size()>0){
 			int countMaiores = 0, countMenores = 0;
-			
+
 			limpaTela(50);
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println("NOME" + tabular(5) +"NASCIMENTO" + tabular(10) + "SEXO" + tabular(4) + "CPF" + tabular(3) +"JA VACINADO?/QTD VEZES?");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
-			
+
 			for(Pessoa pessoa : pacientes.getPessoas()){
 				System.out.println(pessoa);
 				if(pessoa instanceof MaiorDeIdade){
@@ -671,7 +669,7 @@ public class Janela extends JFrame {
 				}else
 					countMenores++;
 			}
-			
+
 			limpaTela(5);
 			System.out.println("Quantidade de Pacientes Maiores de Idade: " + countMaiores);
 			System.out.println("Quantidade de Pacientes Menores de Idade: " + countMenores);

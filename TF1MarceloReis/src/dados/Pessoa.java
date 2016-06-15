@@ -1,6 +1,6 @@
 package dados;
 
-public abstract class Pessoa{
+public abstract class Pessoa implements Comparable<Pessoa>{
 
 	private String nome;
 	private Character sexo;
@@ -27,7 +27,17 @@ public abstract class Pessoa{
 		return dataNascimento;
 	}
 
+	public String consultarDados(){
+		return "";
+	}
+	
 	public StringBuilder getCpf() {
 		return cpf;
 	}
+	
+	@Override
+	public int compareTo(Pessoa pessoa) {
+		return (getNome().compareTo(pessoa.getNome()));
+	}
+	
 }

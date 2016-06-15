@@ -5,7 +5,6 @@ import dados.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import servicos.OrdenaNome;
 import servicos.Validacao;
 import dados.BancoDePacientes;
 
@@ -396,7 +395,7 @@ public class Janela extends JFrame {
 					}
 
 					if(nameIsValid && dateIsValid && vacinadoAnteriormente && cpfIsValid && sexoIsValid && data.getIdade()>=18){
-						pacientes.getPessoasMaioresDeIdade().add(new MaiorDeIdade(textRecebeNome.getText().trim()
+						pacientes.getPessoas().add(new MaiorDeIdade(textRecebeNome.getText().trim()
 								, rdbtnFeminino.isSelected() ? 'F' : 'M', data, 
 										new StringBuilder().append(textRecebeCpf.getText().trim()),
 										rdbtnJaVacinadoAnteriormenteSim.isSelected() ? true : false));
@@ -407,7 +406,7 @@ public class Janela extends JFrame {
 						menuGeral();
 
 					}else if(nameIsValid && dateIsValid && qtdVacinadoAnteriormenteIsValid && cpfIsValid && sexoIsValid && data.getIdade()<18){
-						pacientes.getPessoasMenoresDeIdade().add(new MenorDeIdade(textRecebeNome.getText().trim()
+						pacientes.getPessoas().add(new MenorDeIdade(textRecebeNome.getText().trim()
 								, rdbtnFeminino.isSelected() ? 'F' : 'M', data, 
 										new StringBuilder().append(textRecebeCpf.getText().trim()),
 										Integer.parseInt(textQtdVezesVacinado.getText().trim())));
@@ -503,16 +502,9 @@ public class Janela extends JFrame {
 			if(!pacientes.cpfERepetido(cpf))
 				JOptionPane.showMessageDialog(null, "Nao existe nenhum paciente com este cpf");
 			else{
-				for(MaiorDeIdade maiorDeIdade : pacientes.getPessoasMaioresDeIdade()){
-					if(maiorDeIdade.getCpf().toString().equals(cpf)){
-						JOptionPane.showMessageDialog(null, maiorDeIdade.consultarMaiorDeIdade() ,"Paciente Registrado", JOptionPane.PLAIN_MESSAGE);
-					}
-				}
-				for(MenorDeIdade menorDeIdade : pacientes.getPessoasMenoresDeIdade()){
-					if(menorDeIdade.getCpf().toString().equals(cpf)){
-						JOptionPane.showMessageDialog(null, menorDeIdade.consultarMenorDeIdade()
-								, "Paciente Registrado", JOptionPane.PLAIN_MESSAGE);
-
+				for(Pessoa pessoa : pacientes.getPessoas()){
+					if(pessoa.getCpf().toString().equals(cpf)){
+						JOptionPane.showMessageDialog(null, pessoa.consultarDados() ,"Paciente Registrado", JOptionPane.PLAIN_MESSAGE);
 					}
 				}
 			}
@@ -621,26 +613,16 @@ public class Janela extends JFrame {
 					
 					Object []linhas = new Object[numColunas];
 
-					List<Pessoa> pessoas = new ArrayList<Pessoa>();
-
 					tablePesquisar.setModel(new DefaultTableModel(new Object[][] {}, 
 							new String[]{"Nome", "Idade", "Sexo", "CPF"
 					}
 							));
 
 					scrollPane.setViewportView(tablePesquisar);
+					
+					Collections.sort(pacientes.getPessoas());
 
-					for(MaiorDeIdade maiorDeIdade : pacientes.getPessoasMaioresDeIdade()){
-						pessoas.add(maiorDeIdade);
-					}
-					for(MenorDeIdade menorDeIdade : pacientes.getPessoasMenoresDeIdade()){
-						pessoas.add(menorDeIdade);
-					}
-
-					OrdenaNome ordemNome = new OrdenaNome();
-					Collections.sort(pessoas, ordemNome);
-
-					for(Pessoa pessoa : pessoas){
+					for(Pessoa pessoa : pacientes.getPessoas()){
 						if(pessoa.getNome().toUpperCase().contains(textFieldRecebeNomePesquisa.getText().trim().toUpperCase())){
 							encontrouAlguem = true;
 							linhas [0] = pessoa.getNome();
@@ -674,24 +656,26 @@ public class Janela extends JFrame {
 
 	private void listarPessoas(){
 
-		if(pacientes.getPessoasMaioresDeIdade().size()>0 || pacientes.getPessoasMenoresDeIdade().size()>0){
+		if(pacientes.getPessoas().size()>0){
+			int countMaiores = 0, countMenores = 0;
+			
 			limpaTela(50);
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
 			System.out.println("NOME" + tabular(5) +"NASCIMENTO" + tabular(10) + "SEXO" + tabular(4) + "CPF" + tabular(3) +"JA VACINADO?/QTD VEZES?");
 			System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------");
-			if(pacientes.getPessoasMaioresDeIdade().size()>0){
-				for(MaiorDeIdade maiorDeIdade : pacientes.getPessoasMaioresDeIdade())
-					System.out.println(maiorDeIdade);
+			
+			for(Pessoa pessoa : pacientes.getPessoas()){
+				System.out.println(pessoa);
+				if(pessoa instanceof MaiorDeIdade){
+					countMaiores++;
+				}else
+					countMenores++;
 			}
-
-			if(pacientes.getPessoasMenoresDeIdade().size()>0){
-				for(MenorDeIdade menorDeIdade : pacientes.getPessoasMenoresDeIdade())
-					System.out.println(menorDeIdade);
-			}
+			
 			limpaTela(5);
-			System.out.println("Quantidade de Pacientes Maiores de Idade: " + pacientes.getPessoasMaioresDeIdade().size());
-			System.out.println("Quantidade de Pacientes Menores de Idade: " + pacientes.getPessoasMenoresDeIdade().size());
-			System.out.println("Quantidade total de Pacientes: " + (pacientes.getPessoasMaioresDeIdade().size() + pacientes.getPessoasMenoresDeIdade().size()));
+			System.out.println("Quantidade de Pacientes Maiores de Idade: " + countMaiores);
+			System.out.println("Quantidade de Pacientes Menores de Idade: " + countMenores);
+			System.out.println("Quantidade total de Pacientes: " + pacientes.getPessoas().size());
 		}
 		else{
 			JOptionPane.showMessageDialog(null, "NENHUM PACIENTE CADASTRADO!");

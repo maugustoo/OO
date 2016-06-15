@@ -17,7 +17,7 @@ public class MenorDeIdade extends Pessoa{
 		return quantasVezesFoiVacinada;
 	}
 
-	public String consultarMenorDeIdade(){
+	public String consultarDados(){
 		return "Nome: " + getNome() + "\n" +
 				"Data de Nascimento: " + getDataNascimento() + "\n" +
 				"Sexo: " + ((getSexo() == 'M') ? "Masculino\n" : "Feminino\n") +

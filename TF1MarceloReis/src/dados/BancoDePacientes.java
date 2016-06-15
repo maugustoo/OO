@@ -7,27 +7,18 @@ import java.util.List;
 
 public class BancoDePacientes implements ChavePessoa{
 
-	private List<MenorDeIdade> pessoasMenoresDeIdade;
-	private List<MaiorDeIdade> pessoasMaioresDeIdade;
+	private List<Pessoa> pessoas;
 
 	public BancoDePacientes() {
-		pessoasMenoresDeIdade = new ArrayList<MenorDeIdade>();
-		pessoasMaioresDeIdade = new ArrayList<MaiorDeIdade>();
+		pessoas = new ArrayList<Pessoa>();
 	}
-	public List<MenorDeIdade> getPessoasMenoresDeIdade() {
-		return pessoasMenoresDeIdade;
+	public List<Pessoa> getPessoas() {
+		return pessoas;
 	}
-	public void setPessoasMenoresDeIdade(MenorDeIdade pessoaMenorDeIdade) {
-		pessoasMenoresDeIdade.add(pessoaMenorDeIdade);
+	public void setPessoas(Pessoa pessoa) {
+		pessoas.add(pessoa);
 	}
-	public List<MaiorDeIdade> getPessoasMaioresDeIdade() {
-		return pessoasMaioresDeIdade;
-	}
-
-	public void setPessoasMaioresDeIdade(MaiorDeIdade pessoaMaiorDeIdade) {
-		pessoasMaioresDeIdade.add(pessoaMaiorDeIdade);
-	}
-
+	
 	@Override
 	public boolean tamanhoEValido(String cpf) {
 		return cpf.length() == 11 ? true : false;
@@ -76,16 +67,12 @@ public class BancoDePacientes implements ChavePessoa{
 
 		cpf = cpf.replace(".", "").replace("-", "");
 
-		for(int count = 0; count < pessoasMaioresDeIdade.size(); count++){
-			if(pessoasMaioresDeIdade.get(count).getCpf().toString().replace(".", "").replace("-", "").equals(cpf)){
+		for(int count = 0; count < pessoas.size(); count++){
+			if(pessoas.get(count).getCpf().toString().replace(".", "").replace("-", "").equals(cpf)){
 				return true;
 			}
 		}
-		for(int count = 0; count < pessoasMenoresDeIdade.size(); count++){
-			if(pessoasMenoresDeIdade.get(count).getCpf().toString().replace(".", "").replace("-", "").equals(cpf)){
-				return true;
-			}
-		}
+		
 		return false;
 	}
 

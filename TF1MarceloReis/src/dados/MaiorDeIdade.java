@@ -17,7 +17,7 @@ public class MaiorDeIdade extends Pessoa {
 		return vacinadaAnteriormente;
 	}
 
-	public String consultarMaiorDeIdade(){
+	public String consultarDados(){
 		return "Nome: " + getNome() + "\n" +
 				"Data de Nascimento: " + getDataNascimento() + "\n" +
 				"Sexo: " + ((getSexo() == 'M') ? "Masculino\n" : "Feminino\n") +
